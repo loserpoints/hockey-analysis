@@ -25,10 +25,6 @@ select_team <- "T.B"
 verbose_team <- "Tampa Bay Lightning"
 
 
-###### generate team chart using function defined below
-
-generate_team_dashboard()
-
 
 ###### define function for generating team chart
 
@@ -239,3 +235,8 @@ generate_team_dashboard <- function(x) {
          height = 10.667)
   
 }
+
+
+###### generate team chart using function defined below
+
+generate_team_dashboard()

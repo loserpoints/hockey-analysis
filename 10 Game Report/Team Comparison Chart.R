@@ -20,10 +20,6 @@ select_team <- "T.B"
 compare_team <- "ARI"
 
 
-###### generate team comparison chart using function defined below
-
-generate_team_comparison_dashboard()
-
 
 ###### define function for generating team comparison chart
 
@@ -257,3 +253,8 @@ annotate_figure(
 ggsave(paste0("Viz/team_comp_dash_", date, ".jpg"), width = 21.333, height = 10.667)
 
 }
+
+
+###### generate team comparison chart using function defined below
+
+generate_team_comparison_dashboard()
