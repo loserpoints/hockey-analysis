@@ -2,7 +2,7 @@
 ## better title spacing on final dashboard
 
 
-######### generate single team chart with descriptive variabile names
+######### generate single team chart with descriptive variable names
 
 ###### load dependencies
 

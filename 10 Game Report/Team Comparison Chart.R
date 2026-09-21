@@ -2,7 +2,7 @@
 ## better title spacing on final dashboard
 
 
-######### generate team comparison chart with descriptive variabile names
+######### generate team comparison chart with descriptive variable names
 
 ###### load dependencies
 
