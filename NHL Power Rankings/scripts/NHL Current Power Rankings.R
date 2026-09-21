@@ -14,10 +14,6 @@ library(extrafont)
 setwd("NHL Power Rankings")
 
 
-###### run function to generate power rankings and associated plots
-
-power.rankings <- get.power.rankings()
-
 
 ###### define function to generate power rankings and associated plots
 
@@ -352,3 +348,8 @@ ggsave("viz/nhl_xg_diff_opp_quality.png", height = 10.666, width = 21.333)
 
 
 }
+
+
+###### run function to generate power rankings and associated plots
+
+power.rankings <- get.power.rankings()

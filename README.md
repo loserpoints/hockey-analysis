@@ -115,9 +115,13 @@ recorded rather than fixed — the code is kept as it was written.
 
 ### Working directory
 
-Paths are relative to the repository root. Open `Hockey.Rproj` and run from
-there. Five scripts `setwd()` into their own project folder first; running one
-of those twice in a session will fail on the second `setwd()`.
+Most scripts read `data/` and write `viz/` relative to **their own project
+folder**, so set the working directory to that folder before running one.
+
+Five scripts instead call `setwd("Project Name")` at the top, which assumes
+the working directory is the repository root. These two conventions
+contradict each other — the repo has never settled on one. Running one of
+those five twice in a session will also fail on the second `setwd()`.
 
 ### Database
 
