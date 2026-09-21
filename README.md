@@ -98,6 +98,21 @@ can be compared under identical conditions, not as fixes.
 
 ## Running these
 
+### Packages
+
+```r
+install.packages(c("tidyverse", "extrafont", "ggthemes", "hrbrthemes", "rvest",
+                   "scales", "RMariaDB", "ggpubr", "ggrepel", "ggalt", "cowplot",
+                   "zoo", "reshape2", "mgcv", "ggforce", "fuzzyjoin",
+                   "BradleyTerry2", "googledrive", "googlesheets4"))
+```
+
+Written against the versions current in 2019–2020 and not updated since.
+Two things have changed underneath them: dplyr removed `funs()`, and
+`cbind()` on grouped tibbles now de-duplicates column names. **Several
+scripts will not run on a current tidyverse without adjustment.** That's
+recorded rather than fixed — the code is kept as it was written.
+
 ### Working directory
 
 Paths are relative to the repository root. Open `Hockey.Rproj` and run from

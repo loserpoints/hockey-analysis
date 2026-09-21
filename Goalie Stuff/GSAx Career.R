@@ -3,6 +3,7 @@
 library(tidyverse)
 library(ggthemes)
 library(extrafont)
+library(RMariaDB)
 
 
 ### load fonts for viz

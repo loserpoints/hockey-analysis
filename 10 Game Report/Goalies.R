@@ -6,6 +6,7 @@ library(tidyverse)
 library(ggthemes) 
 library(ggpubr)
 library(extrafont)
+library(RMariaDB)
 
 
 ### set working directory

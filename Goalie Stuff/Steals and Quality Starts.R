@@ -6,6 +6,7 @@ library(extrafont)
 library(googledrive)
 library(googlesheets4)
 library(ggrepel)
+library(RMariaDB)
 
 ### load fonts for viz
 

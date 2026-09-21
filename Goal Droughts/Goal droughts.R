@@ -4,6 +4,8 @@ library(tidyverse)
 library(stringr)
 library(ggalt)
 library(extrafont)
+library(RMariaDB)
+library(ggthemes)
 
 ### load fonts for viz
 

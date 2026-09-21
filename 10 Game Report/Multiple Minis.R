@@ -5,6 +5,7 @@
 library(tidyverse) 
 library(ggthemes)
 library(extrafont)
+library(rvest)
 
 
 #load fonts for viz
