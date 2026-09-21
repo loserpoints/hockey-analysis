@@ -87,4 +87,4 @@ dbWriteTable(
   append = TRUE 
 )
 
-file.remove(shots_1920)
+file.remove("shots_1920.csv")

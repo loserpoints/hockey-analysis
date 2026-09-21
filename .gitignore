@@ -11,3 +11,6 @@
 # Both cases are listed: scripts reference `data/` and `Data/` inconsistently.
 **/data
 **/Data
+
+# Intermediate shot data, removed by the script after loading. See EH Shot Data/.
+shots_*.csv
