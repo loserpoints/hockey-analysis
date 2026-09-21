@@ -104,7 +104,7 @@ playoffs <- do.call(rbind, dflist1) %>%
 
 free_agents_site <- read_html("https://www.spotrac.com/nhl/free-agents/")
 
-free_agents_table <- html_nodes(free_agent_site, "table")
+free_agents_table <- html_nodes(free_agents_site, "table")
 
 free_agents <- html_table(free_agents_table) [[1]] %>%
   
