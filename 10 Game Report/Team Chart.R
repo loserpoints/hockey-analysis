@@ -46,872 +46,146 @@ generate_team_dashboard <- function(x) {
       Group = factor(Group, levels = unique(Group)),
       Verbose = factor(Verbose, levels = unique(Verbose))
     )
-  
-  
+
+  ####### build one dashboard panel
+  ##
+  ## the seven panels are identical apart from the Group they filter to,
+  ## the measure the Good/Bad labels are anchored on, and the title
+
+  build_panel <- function(group_name, annotation_label, plot_title) {
+
+    panel_data <- team_chart %>%
+
+      filter(Group == group_name) %>%
+
+      arrange(Group_Order, Measure_Order)
+
+
+
+      ggplot(panel_data, aes(x = Verbose, y = Season_Value_Z_Score)) +
+
+      geom_bar(stat = "identity", fill = "dodgerblue3") +
+
+      geom_point(
+        aes(x = Verbose, y = PU10_Value_Z_Score),
+        size = 5,
+        shape = 21,
+        stroke = 1,
+        color = "black",
+        fill = "gray"
+      ) +
+
+      geom_point(
+        aes(x = Verbose, y = U10_Value_Z_Score),
+        size = 5,
+        shape = 21,
+        stroke = 1,
+        color = "black",
+        fill = "darkorange2"
+      ) +
+
+      geom_hline(yintercept = 1,
+                 linetype = 2,
+                 size = 1) +
+
+      geom_hline(yintercept = -1,
+                 linetype = 2,
+                 size = 1) +
+
+      geom_rect(
+        ymin = -2.5,
+        ymax = -1,
+        xmin = -Inf,
+        xmax = Inf,
+        fill = "tomato",
+        alpha = 0.1
+      ) +
+
+      geom_rect(
+        ymin = 1,
+        ymax = 2.5,
+        xmin = -Inf,
+        xmax = Inf,
+        fill = "forestgreen",
+        alpha = 0.1
+      ) +
+
+      geom_label(
+        data = filter(team_chart, Verbose == annotation_label),
+        aes(
+          x = 1.35,
+          y = 1.25,
+          label = "Good",
+          size = 6
+        ),
+        fill = "white",
+        family = "Trebuchet MS"
+      ) +
+
+      geom_label(
+        data = filter(team_chart, Verbose == annotation_label),
+        aes(
+          x = 1.35,
+          y = -1.25,
+          label = "Bad",
+          size = 6
+        ),
+        fill = "white",
+        family = "Trebuchet MS"
+      ) +
+
+      facet_wrap(
+        ~ Verbose,
+        ncol = 1,
+        strip.position = "left",
+        scales = "free_y",
+        labeller = label_wrap_gen(15)
+      ) +
+
+      coord_flip(ylim = c(-2.5, 2.5)) +
+
+      ggtitle(plot_title) +
+
+      theme_few() +
+
+      theme(
+        plot.title = element_text(
+          face = "bold",
+          size = 22,
+          family = "Trebuchet MS"
+        ),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        strip.placement = "outside",
+        strip.text.y = element_text(
+          face = "bold",
+          size = 15,
+          angle = 180,
+          family = "Trebuchet MS"
+        ),
+        legend.position = "none",
+        plot.caption = element_text(
+          size = 18,
+          face = "italic",
+          hjust = 1,
+          margin = margin(t = 15, b = 5),
+          family = "Trebuchet MS"
+        )
+      )
+
+  }
+
+
   ####### create individual component plots to be arranged on dashboard
-  
-  ### create 5v5 offense plot
-  
-  off_5v5 <- team_chart %>%
-    
-    filter(Group == "5v5 Offense") %>%
-    
-    arrange(Group_Order, Measure_Order)
-  
-  
-  off_5v5_plot <-
-    
-    ggplot(off_5v5, aes(x = Verbose, y = Season_Value_Z_Score)) +
-    
-    geom_bar(stat = "identity", fill = "dodgerblue3") +
-    
-    geom_point(
-      aes(x = Verbose, y = PU10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "gray"
-    ) +
-    
-    geom_point(
-      aes(x = Verbose, y = U10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "darkorange2"
-    ) +
-    
-    geom_hline(yintercept = 1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_hline(yintercept = -1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_rect(
-      ymin = -2.5,
-      ymax = -1,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "tomato",
-      alpha = 0.1
-    ) +
-    
-    geom_rect(
-      ymin = 1,
-      ymax = 2.5,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "forestgreen",
-      alpha = 0.1
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Generation"),
-      aes(
-        x = 1.35,
-        y = 1.25,
-        label = "Good",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Generation"),
-      aes(
-        x = 1.35,
-        y = -1.25,
-        label = "Bad",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    facet_wrap(
-      ~ Verbose,
-      ncol = 1,
-      strip.position = "left",
-      scales = "free_y",
-      labeller = label_wrap_gen(15)
-    ) +
-    
-    coord_flip(ylim = c(-2.5, 2.5)) +
-    
-    ggtitle("5v5 Offense") +
-    
-    theme_few() +
-    
-    theme(
-      plot.title = element_text(
-        face = "bold",
-        size = 22,
-        family = "Trebuchet MS"
-      ),
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      strip.placement = "outside",
-      strip.text.y = element_text(
-        face = "bold",
-        size = 15,
-        angle = 180,
-        family = "Trebuchet MS"
-      ),
-      legend.position = "none",
-      plot.caption = element_text(
-        size = 18,
-        face = "italic",
-        hjust = 1,
-        margin = margin(t = 15, b = 5),
-        family = "Trebuchet MS"
-      )
-    )
-  
-  
-  
-  ### create 5v5 defense plot
-  
-  def_5v5 <- team_chart %>%
-    
-    filter(Group == "5v5 Defense") %>%
-    
-    arrange(Group_Order, Measure_Order)
-  
-  
-  def_5v5_plot <-
-    
-    ggplot(def_5v5, aes(x = Verbose, y = Season_Value_Z_Score)) +
-    
-    geom_bar(stat = "identity", fill = "dodgerblue3") +
-    
-    geom_point(
-      aes(x = Verbose, y = PU10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "gray"
-    ) +
-    
-    geom_point(
-      aes(x = Verbose, y = U10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "darkorange2"
-    ) +
-    
-    geom_hline(yintercept = 1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_hline(yintercept = -1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_rect(
-      ymin = -2.5,
-      ymax = -1,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "tomato",
-      alpha = 0.1
-    ) +
-    
-    geom_rect(
-      ymin = 1,
-      ymax = 2.5,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "forestgreen",
-      alpha = 0.1
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Suppression"),
-      aes(
-        x = 1.35,
-        y = 1.25,
-        label = "Good",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Suppression"),
-      aes(
-        x = 1.35,
-        y = -1.25,
-        label = "Bad",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    facet_wrap(
-      ~ Verbose,
-      ncol = 1,
-      strip.position = "left",
-      scales = "free_y",
-      labeller = label_wrap_gen(15)
-    ) +
-    
-    coord_flip(ylim = c(-2.5, 2.5)) +
-    
-    ggtitle("5v5 Defense") +
-    
-    theme_few() +
-    
-    theme(
-      plot.title = element_text(
-        face = "bold",
-        size = 22,
-        family = "Trebuchet MS"
-      ),
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      strip.placement = "outside",
-      strip.text.y = element_text(
-        face = "bold",
-        size = 15,
-        angle = 180,
-        family = "Trebuchet MS"
-      ),
-      legend.position = "none",
-      plot.caption = element_text(
-        size = 18,
-        face = "italic",
-        hjust = 1,
-        margin = margin(t = 15, b = 5),
-        family = "Trebuchet MS"
-      )
-    )
-  
-  
-  ### create 5v5 share plot
-  
-  total_5v5 <- team_chart %>%
-    
-    filter(Group == "5v5 Total") %>%
-    
-    arrange(Group_Order, Measure_Order)
-  
-  
-  total_5v5_plot <-
-    
-    ggplot(total_5v5, aes(x = Verbose, y = Season_Value_Z_Score)) +
-    
-    geom_bar(stat = "identity", fill = "dodgerblue3") +
-    
-    geom_point(
-      aes(x = Verbose, y = PU10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "gray"
-    ) +
-    
-    geom_point(
-      aes(x = Verbose, y = U10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "darkorange2"
-    ) +
-    
-    geom_hline(yintercept = 1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_hline(yintercept = -1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_rect(
-      ymin = -2.5,
-      ymax = -1,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "tomato",
-      alpha = 0.1
-    ) +
-    
-    geom_rect(
-      ymin = 1,
-      ymax = 2.5,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "forestgreen",
-      alpha = 0.1
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Share"),
-      aes(
-        x = 1.35,
-        y = 1.25,
-        label = "Good",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Share"),
-      aes(
-        x = 1.35,
-        y = -1.25,
-        label = "Bad",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    facet_wrap(
-      ~ Verbose,
-      ncol = 1,
-      strip.position = "left",
-      scales = "free_y",
-      labeller = label_wrap_gen(15)
-    ) +
-    
-    coord_flip(ylim = c(-2.5, 2.5)) +
-    
-    ggtitle("5v5 Total") +
-    
-    theme_few() +
-    
-    theme(
-      plot.title = element_text(
-        face = "bold",
-        size = 22,
-        family = "Trebuchet MS"
-      ),
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      strip.placement = "outside",
-      strip.text.y = element_text(
-        face = "bold",
-        size = 15,
-        angle = 180,
-        family = "Trebuchet MS"
-      ),
-      legend.position = "none",
-      plot.caption = element_text(
-        size = 18,
-        face = "italic",
-        hjust = 1,
-        margin = margin(t = 15, b = 5),
-        family = "Trebuchet MS"
-      )
-    )
-  
-  
-  ### create 5v5 results plot
-  
-  result_5v5 <- team_chart %>%
-    
-    filter(Group == "5v5 Results") %>%
-    
-    arrange(Group_Order, Measure_Order)
-  
-  
-  result_5v5_plot <-
-    
-    ggplot(result_5v5, aes(x = Verbose, y = Season_Value_Z_Score)) +
-    
-    geom_bar(stat = "identity", fill = "dodgerblue3") +
-    
-    geom_point(
-      aes(x = Verbose, y = PU10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "gray"
-    ) +
-    
-    geom_point(
-      aes(x = Verbose, y = U10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "darkorange2"
-    ) +
-    
-    geom_hline(yintercept = 1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_hline(yintercept = -1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_rect(
-      ymin = -2.5,
-      ymax = -1,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "tomato",
-      alpha = 0.1
-    ) +
-    
-    geom_rect(
-      ymin = 1,
-      ymax = 2.5,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "forestgreen",
-      alpha = 0.1
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Goals Scored Above Exp."),
-      aes(
-        x = 1.35,
-        y = 1.25,
-        label = "Good",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Goals Scored Above Exp."),
-      aes(
-        x = 1.35,
-        y = -1.25,
-        label = "Bad",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    facet_wrap(
-      ~ Verbose,
-      ncol = 1,
-      strip.position = "left",
-      scales = "free_y",
-      labeller = label_wrap_gen(15)
-    ) +
-    
-    coord_flip(ylim = c(-2.5, 2.5)) +
-    
-    ggtitle("5v5 Results") +
-    
-    theme_few() +
-    
-    theme(
-      plot.title = element_text(
-        face = "bold",
-        size = 22,
-        family = "Trebuchet MS"
-      ),
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      strip.placement = "outside",
-      strip.text.y = element_text(
-        face = "bold",
-        size = 15,
-        angle = 180,
-        family = "Trebuchet MS"
-      ),
-      legend.position = "none",
-      plot.caption = element_text(
-        size = 18,
-        face = "italic",
-        hjust = 1,
-        margin = margin(t = 15, b = 5),
-        family = "Trebuchet MS"
-      )
-    )
-  
-  
-  ### create 5v4 offense plot
-  
-  off_5v4 <- team_chart %>%
-    
-    filter(Group == "5v4 Offense") %>%
-    
-    arrange(Group_Order, Measure_Order)
-  
-  
-  off_5v4_plot <-
-    
-    ggplot(off_5v4, aes(x = Verbose, y = Season_Value_Z_Score)) +
-    
-    geom_bar(stat = "identity", fill = "dodgerblue3") +
-    
-    geom_point(
-      aes(x = Verbose, y = PU10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "gray"
-    ) +
-    
-    geom_point(
-      aes(x = Verbose, y = U10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "darkorange2"
-    ) +
-    
-    geom_hline(yintercept = 1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_hline(yintercept = -1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_rect(
-      ymin = -2.5,
-      ymax = -1,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "tomato",
-      alpha = 0.1
-    ) +
-    
-    geom_rect(
-      ymin = 1,
-      ymax = 2.5,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "forestgreen",
-      alpha = 0.1
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Generation"),
-      aes(
-        x = 1.35,
-        y = 1.25,
-        label = "Good",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Generation"),
-      aes(
-        x = 1.35,
-        y = -1.25,
-        label = "Bad",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    facet_wrap(
-      ~ Verbose,
-      ncol = 1,
-      strip.position = "left",
-      scales = "free_y",
-      labeller = label_wrap_gen(15)
-    ) +
-    
-    coord_flip(ylim = c(-2.5, 2.5)) +
-    
-    ggtitle("5v4 Offense") +
-    
-    theme_few() +
-    
-    theme(
-      plot.title = element_text(
-        face = "bold",
-        size = 22,
-        family = "Trebuchet MS"
-      ),
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      strip.placement = "outside",
-      strip.text.y = element_text(
-        face = "bold",
-        size = 15,
-        angle = 180,
-        family = "Trebuchet MS"
-      ),
-      legend.position = "none",
-      plot.caption = element_text(
-        size = 18,
-        face = "italic",
-        hjust = 1,
-        margin = margin(t = 15, b = 5),
-        family = "Trebuchet MS"
-      )
-    )
-  
-  
-  ### create 4v5 defense plot
-  
-  def_4v5 <- team_chart %>%
-    
-    filter(Group == "4v5 Defense") %>%
-    
-    arrange(Group_Order, Measure_Order)
-  
-  
-  def_4v5_plot <-
-    
-    ggplot(def_4v5, aes(x = Verbose, y = Season_Value_Z_Score)) +
-    
-    geom_bar(stat = "identity", fill = "dodgerblue3") +
-    
-    geom_point(
-      aes(x = Verbose, y = PU10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "gray"
-    ) +
-    
-    geom_point(
-      aes(x = Verbose, y = U10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "darkorange2"
-    ) +
-    
-    geom_hline(yintercept = 1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_hline(yintercept = -1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_rect(
-      ymin = -2.5,
-      ymax = -1,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "tomato",
-      alpha = 0.1
-    ) +
-    
-    geom_rect(
-      ymin = 1,
-      ymax = 2.5,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "forestgreen",
-      alpha = 0.1
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Suppression"),
-      aes(
-        x = 1.35,
-        y = 1.25,
-        label = "Good",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Shot Suppression"),
-      aes(
-        x = 1.35,
-        y = -1.25,
-        label = "Bad",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    facet_wrap(
-      ~ Verbose,
-      ncol = 1,
-      strip.position = "left",
-      scales = "free_y",
-      labeller = label_wrap_gen(15)
-    ) +
-    
-    coord_flip(ylim = c(-2.5, 2.5)) +
-    
-    ggtitle("4v5 Defense") +
-    
-    theme_few() +
-    
-    theme(
-      plot.title = element_text(
-        face = "bold",
-        size = 22,
-        family = "Trebuchet MS"
-      ),
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      strip.placement = "outside",
-      strip.text.y = element_text(
-        face = "bold",
-        size = 15,
-        angle = 180,
-        family = "Trebuchet MS"
-      ),
-      legend.position = "none",
-      plot.caption = element_text(
-        size = 18,
-        face = "italic",
-        hjust = 1,
-        margin = margin(t = 15, b = 5),
-        family = "Trebuchet MS"
-      )
-    )
-  
-  
-  ### create special teams results plot
-  
-  result_st <- team_chart %>%
-    
-    filter(Group == "ST Results") %>%
-    
-    arrange(Group_Order, Measure_Order)
-  
-  
-  result_st_plot <-
-    
-    ggplot(result_st, aes(x = Verbose, y = Season_Value_Z_Score)) +
-    
-    geom_bar(stat = "identity", fill = "dodgerblue3") +
-    
-    geom_point(
-      aes(x = Verbose, y = PU10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "gray"
-    ) +
-    
-    geom_point(
-      aes(x = Verbose, y = U10_Value_Z_Score),
-      size = 5,
-      shape = 21,
-      stroke = 1,
-      color = "black",
-      fill = "darkorange2"
-    ) +
-    
-    geom_hline(yintercept = 1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_hline(yintercept = -1,
-               linetype = 2,
-               size = 1) +
-    
-    geom_rect(
-      ymin = -2.5,
-      ymax = -1,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "tomato",
-      alpha = 0.1
-    ) +
-    
-    geom_rect(
-      ymin = 1,
-      ymax = 2.5,
-      xmin = -Inf,
-      xmax = Inf,
-      fill = "forestgreen",
-      alpha = 0.1
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Goals Scored Above Exp."),
-      aes(
-        x = 1.35,
-        y = 1.25,
-        label = "Good",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    geom_label(
-      data = filter(team_chart, Verbose == "Goals Scored Above Exp."),
-      aes(
-        x = 1.35,
-        y = -1.25,
-        label = "Bad",
-        size = 6
-      ),
-      fill = "white",
-      family = "Trebuchet MS"
-    ) +
-    
-    facet_wrap(
-      ~ Verbose,
-      ncol = 1,
-      strip.position = "left",
-      scales = "free_y",
-      labeller = label_wrap_gen(15)
-    ) +
-    
-    coord_flip(ylim = c(-2.5, 2.5)) +
-    
-    ggtitle("Special Teams Results") +
-    
-    theme_few() +
-    
-    theme(
-      plot.title = element_text(
-        face = "bold",
-        size = 22,
-        family = "Trebuchet MS"
-      ),
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      strip.placement = "outside",
-      strip.text.y = element_text(
-        face = "bold",
-        size = 15,
-        angle = 180,
-        family = "Trebuchet MS"
-      ),
-      legend.position = "none",
-      plot.caption = element_text(
-        size = 18,
-        face = "italic",
-        hjust = 1,
-        margin = margin(t = 15, b = 5),
-        family = "Trebuchet MS"
-      )
-    )
-  
-  
+
+  off_5v5_plot    <- build_panel("5v5 Offense", "Shot Generation",         "5v5 Offense")
+  def_5v5_plot    <- build_panel("5v5 Defense", "Shot Suppression",        "5v5 Defense")
+  total_5v5_plot  <- build_panel("5v5 Total",   "Shot Share",              "5v5 Total")
+  result_5v5_plot <- build_panel("5v5 Results", "Goals Scored Above Exp.", "5v5 Results")
+  off_5v4_plot    <- build_panel("5v4 Offense", "Shot Generation",         "5v4 Offense")
+  def_4v5_plot    <- build_panel("4v5 Defense", "Shot Suppression",        "4v5 Defense")
+  result_st_plot  <- build_panel("ST Results",  "Goals Scored Above Exp.", "Special Teams Results")
+
   ###### arrange plots on dashboard
   
   set_null_device("png")
