@@ -82,6 +82,20 @@ Rscript "10 Game Report/test/render from fixture.R" "10 Game Report/Team Chart.R
 Render before and after a change and compare checksums. This is how the
 panel extraction in both charts was verified as producing identical output.
 
+`report data harness.R` does the same for `Data Wrangling.R`, stubbing the
+scrape so no request reaches Natural Stat Trick, and saving what
+`get_report_data()` returns for comparison with `identical()`.
+
+```
+Rscript "10 Game Report/test/report data harness.R" "10 Game Report/Data Wrangling.R" out.rds
+```
+
+Both harnesses shim two things that changed after this code was written:
+dplyr removed `funs()`, and `cbind()` on grouped tibbles now de-duplicates
+column names where it used to keep them. **These scripts do not run on a
+current tidyverse without those shims.** The shims exist so before and after
+can be compared under identical conditions, not as fixes.
+
 ## Running these
 
 ### Working directory
