@@ -8,7 +8,7 @@ library(hrbrthemes)
 
 ###### set working directory
 
-setwd("C:/Users/Alan/Documents/R/Projects/Hockey/Team Tiers")
+setwd("Team Tiers")
 
 ###### load fonts for viz
 
@@ -40,6 +40,11 @@ sites <-
 ### scrape data and output a list of data frames
 
 dflist <- lapply(sites, function(x) {
+  
+  ## rate limit - hockey reference publishes a limit of roughly 20 requests
+  ## per minute and blocks addresses that exceed it
+  
+  Sys.sleep(5)
   
   playoffs_page <- read_html(x)
   

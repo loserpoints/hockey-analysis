@@ -28,6 +28,10 @@ site <- paste0("http://www.espn.com/nhl/standings/_/season/", years)
 
 season_list <- lapply(site, function(i) {
   
+  ## rate limit - this loop requests 17 pages in succession
+  
+  Sys.sleep(5)
+  
   page <- read_html(i)
   
   standings_table <- html_nodes(page, "table")

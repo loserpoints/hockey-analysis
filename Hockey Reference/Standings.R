@@ -33,6 +33,11 @@ sites <- sites$sites
 
 dflist <- lapply(sites, function(x) {
   
+  ## rate limit - hockey reference publishes a limit of roughly 20 requests
+  ## per minute and blocks addresses that exceed it
+  
+  Sys.sleep(5)
+  
   playoffs_page <- read_html(x[1])
   
   playoffs_table <- html_nodes(playoffs_page, "table")
@@ -73,6 +78,11 @@ dflist <- lapply(sites, function(x) {
            playoff_exit_round = as.numeric(playoff_exit_round))
   
   
+  
+  ## rate limit - hockey reference publishes a limit of roughly 20 requests
+  ## per minute and blocks addresses that exceed it
+  
+  Sys.sleep(5)
   
   standings_page <- read_html(x[2])
   
@@ -122,4 +132,4 @@ tbl <- standings %>%
   mutate(seed = row_number())
 
 
-write.csv(tbl, "C:/Users/Alan/Desktop/lightning_bracket.csv", row.names = F)
+write.csv(tbl, "Hockey Reference/lightning_bracket.csv", row.names = F)

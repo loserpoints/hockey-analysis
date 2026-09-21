@@ -52,7 +52,42 @@ Recurring metrics, all Evolving Hockey definitions:
 | `Team Shooting` | Team-level shooting talent versus variance |
 | `Trophies` | Awards cases built from SPAR and RAPM |
 
+## Scraping
+
+Several projects scrape rather than read local files — Hockey Reference,
+Natural Stat Trick, ESPN, Spotrac and Wikipedia.
+
+The loops that request many pages in succession are rate limited to one
+request every five seconds. Hockey Reference publishes a limit of roughly
+twenty requests a minute and blocks addresses that exceed it, and the
+historical skater scrape in `Hockey Reference/Hockey Reference Player Data.R`
+requests 102 pages in a single run.
+
+**If you add or modify a scraping loop, keep the `Sys.sleep()` in it.** The
+one-off fetches — a single Wikipedia or Spotrac page — aren't throttled,
+because one request isn't a rate problem.
+
 ## Running these
+
+### Working directory
+
+Paths are relative to the repository root. Open `Hockey.Rproj` and run from
+there. Five scripts `setwd()` into their own project folder first; running one
+of those twice in a session will fail on the second `setwd()`.
+
+### Database
+
+The shot-level projects read from a local MariaDB database named
+`nhl_shots_eh`. The password comes from an environment variable rather than
+being hardcoded. Set it in `~/.Renviron`:
+
+```
+HOCKEY_DB_PASSWORD=your_password_here
+```
+
+Then restart R.
+
+### Fonts
 
 Written on Windows — scripts call `loadfonts(device = "win")`, which needs
 changing on macOS or Linux. Charts use `hrbrthemes` with IBM Plex Sans, so

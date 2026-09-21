@@ -4,7 +4,7 @@ library(RMariaDB)
 
 ### set wd
 
-setwd("C:/Users/Alan/Documents/R/Projects/Hockey/EH Shot Data")
+setwd("EH Shot Data")
 
 ### read current season data from local
 
@@ -47,7 +47,7 @@ shots_db <-
   dbConnect(
     MariaDB(),
     user = "root",
-    password = password,
+    password = Sys.getenv("HOCKEY_DB_PASSWORD"),
     dbname = "nhl_shots_eh",
     host = "localhost"
   )

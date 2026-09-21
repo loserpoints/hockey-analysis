@@ -8,7 +8,7 @@ library(scales)
 
 ###### set working directory
 
-setwd("C:/Users/Alan/Documents/R/Projects/Hockey/Tanking")
+setwd("Tanking")
 
 ###### load fonts for viz
 
