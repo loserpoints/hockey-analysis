@@ -20,17 +20,17 @@ loadfonts(device = "win")
 
 #read local CSVs
 
-skaters.5v5.summary <- read_csv("Data/5v5 summary.csv")
+skaters.5v5.summary <- read_csv("ten_game_report/data/5v5 summary.csv")
 
-skaters.5v5.onice <- read_csv("Data/5v5 on ice.csv")
+skaters.5v5.onice <- read_csv("ten_game_report/data/5v5 on ice.csv")
 
-skaters.5v4.summary <- read_csv("Data/5v4 summary.csv")
+skaters.5v4.summary <- read_csv("ten_game_report/data/5v4 summary.csv")
 
-skaters.4v5.summary <- read_csv("Data/4v5 summary.csv")
+skaters.4v5.summary <- read_csv("ten_game_report/data/4v5 summary.csv")
 
-skaters.ev.rapm <- read_csv("Data/ev rapm.csv")
+skaters.ev.rapm <- read_csv("ten_game_report/data/ev rapm.csv")
 
-skaters.war <- read_csv("Data/war.csv")
+skaters.war <- read_csv("ten_game_report/data/war.csv")
 
 
 #Get Team TOI
@@ -354,4 +354,4 @@ ggplot(skaters.chart, aes(x = Player, y = Verbose, fill = Z.Score)) +
 
 #save plot
 
-ggsave(paste0("Viz/lightning_skater_heatmap_", Sys.Date(), ".png"), width = 21.333, height = 10.667)
+ggsave(paste0("ten_game_report/viz/lightning_skater_heatmap_", Sys.Date(), ".png"), width = 21.333, height = 10.667)

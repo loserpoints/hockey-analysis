@@ -106,7 +106,7 @@ playoff_series <- rbind(playoff_series_winners, playoff_series_losers) %>%
 
 ### read local standings data from evolving hockey export and join with hockey ref playoff data
 
-playoff_paths <- read_csv("data/EH_tm_standings_2020-09-10.csv") %>%
+playoff_paths <- read_csv("playoff_paths/data/EH_tm_standings_2020-09-10.csv") %>%
   
   mutate(year = as.numeric(paste0("20", substr(Season, 4, 5)))) %>%
   
@@ -187,7 +187,7 @@ ggplot() +
         strip.text = element_text(hjust = 0.5, size = 18),
         strip.background = element_rect(color = "gray36"))
 
-ggsave(filename = "viz/lightning_2020.png", width = 10.666, height = 21.333)
+ggsave(filename = "playoff_paths/viz/lightning_2020.png", width = 10.666, height = 21.333)
 
 
 #### generate a data frame with each team's single season total path difficulty

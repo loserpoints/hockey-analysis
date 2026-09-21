@@ -1,6 +1,6 @@
 library(tidyverse)
 
-player_seasons_1 <- read_csv("data/player_seasons.csv") %>%
+player_seasons_1 <- read_csv("metric_testing/data/player_seasons.csv") %>%
   
   mutate(Position = ifelse(Position == "D", "D", "F")) %>%
   

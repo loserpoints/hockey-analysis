@@ -98,5 +98,5 @@ ggplot(period_xg, aes(value)) +
         strip.text = element_text(hjust = 0.5, size = 18),
         strip.background = element_rect(color = "gray36"))
 
-ggsave(filename = "viz/lightning_2020.png", width = 21.333, height = 10.66)
+ggsave(filename = "single_period_outliers/viz/lightning_2020.png", width = 21.333, height = 10.66)
 

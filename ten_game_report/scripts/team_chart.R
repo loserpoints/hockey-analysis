@@ -230,7 +230,7 @@ generate_team_dashboard <- function(x) {
   
   ###### save plot
   
-  ggsave(paste0("Viz/team_dash_", Sys.Date(), ".jpg"),
+  ggsave(paste0("ten_game_report/viz/team_dash_", Sys.Date(), ".jpg"),
          width = 21.333,
          height = 10.667)
   

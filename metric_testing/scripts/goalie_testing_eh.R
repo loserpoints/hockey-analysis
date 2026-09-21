@@ -138,7 +138,7 @@ ggplot(goalie_seasons, aes(performance_1, performance_2)) +
         strip.text = element_text(hjust = 0.5, size = 18),
         strip.background = element_rect(color = "gray36"))
 
-ggsave(filename = "viz/goalie_repeatability_eh.png", width = 21.333, height = 10.666)
+ggsave(filename = "metric_testing/viz/goalie_repeatability_eh.png", width = 21.333, height = 10.666)
 
 
 ### gsax distributions
@@ -169,7 +169,7 @@ ggplot(goalie_seasons, aes(performance_1)) +
         strip.text = element_text(hjust = 0.5, size = 18),
         strip.background = element_rect(color = "gray36"))
 
-ggsave(filename = "viz/goalie_distros_eh.png", width = 21.333, height = 10.666)
+ggsave(filename = "metric_testing/viz/goalie_distros_eh.png", width = 21.333, height = 10.666)
 
 
 ### extra nerd stuff

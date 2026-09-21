@@ -13,14 +13,14 @@ import_plex_sans()
 
 ### read shot data
 
-shots <- read_csv("data/shots_1920.csv") %>%
+shots <- read_csv("team_shooting/data/shots_1920.csv") %>%
   
   filter(!is.na(pred_goal)) %>%
   
   select(team = event_team, shooter = event_player_1, xG = pred_goal)
 
 
-shooting <- read_csv("data/skater_data_1720.csv") %>%
+shooting <- read_csv("team_shooting/data/skater_data_1720.csv") %>%
   
   mutate(shooting_impact = (G-ixG)/iFF) %>%
   
@@ -79,4 +79,4 @@ ggplot(team_shooting, aes(x = team)) +
         legend.position = "none")
 
 
-ggsave(filename = "viz/shooter_impact_on_team_xG.jpg", height = 21.333, width = 10.666)
+ggsave(filename = "team_shooting/viz/shooter_impact_on_team_xG.jpg", height = 21.333, width = 10.666)

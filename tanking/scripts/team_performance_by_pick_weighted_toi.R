@@ -5,11 +5,6 @@ library(extrafont)
 library(hrbrthemes)
 library(scales)
 
-
-###### set working directory
-
-setwd("tanking")
-
 ###### load fonts for viz
 
 loadfonts(device = "win")
@@ -19,10 +14,10 @@ import_plex_sans()
 
 ###### load data from local
 
-skaters <- read_csv("data/skaters.csv")
-team_stats <- read_csv("data/team_stats.csv")
-team_standings <- read_csv("data/team_standings.csv")
-draft_table <- read_csv("data/draft_table.csv")
+skaters <- read_csv("tanking/data/skaters.csv")
+team_stats <- read_csv("tanking/data/team_stats.csv")
+team_standings <- read_csv("tanking/data/team_standings.csv")
+draft_table <- read_csv("tanking/data/draft_table.csv")
 
 
 ###### get team toi totals for merging
@@ -108,4 +103,4 @@ ggplot(draft_totals, aes(pick_weight, team_points_per)) +
   )
 
 
-ggsave("viz/results_by_pick_weighted_toi.png", width = 21.333, height = 10.666)
+ggsave("tanking/viz/results_by_pick_weighted_toi.png", width = 21.333, height = 10.666)

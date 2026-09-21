@@ -97,7 +97,7 @@ ggplot(mm_5v5_shots, aes(x = N, y = Running_ShotDiff)) +
 
 #save plot
 
-ggsave("Viz/mm_running_shotdiff.png", width = 21.333, height = 10.667)
+ggsave("ten_game_report/viz/mm_running_shotdiff.png", width = 21.333, height = 10.667)
 
 
 #format xG and goal data
@@ -163,4 +163,4 @@ ggplot(mm_5v5_xG, aes(x = N, y = Running_GoalDiff, fill = "Goals")) +
 
 #save plot
 
-ggsave("Viz/mm_running_xgdiff.png", width = 21.333, height = 10.667)
+ggsave("ten_game_report/viz/mm_running_xgdiff.png", width = 21.333, height = 10.667)

@@ -89,7 +89,7 @@ ggplot(forward_chart, aes(x = Player, y = Verbose, fill = Z.Score)) +
     plot.caption = element_text(size = 18, face = "italic", hjust = 1, margin = margin(t = 15, b = 5), family = "Trebuchet MS"))
 
 
-ggsave(paste0("Viz/trade_deadline_heatmap_forwards_", Sys.Date(), ".png"), width = 21.333, height = 10.667)
+ggsave(paste0("ten_game_report/viz/trade_deadline_heatmap_forwards_", Sys.Date(), ".png"), width = 21.333, height = 10.667)
 
 
 
@@ -140,5 +140,5 @@ ggplot(defense_chart, aes(x = Player, y = Verbose, fill = Z.Score)) +
     plot.caption = element_text(size = 18, face = "italic", hjust = 1, margin = margin(t = 15, b = 5), family = "Trebuchet MS"))
 
 
-ggsave(paste0("Viz/trade_deadline_heatmap_defense_", Sys.Date(), ".png"), width = 21.333, height = 10.667)
+ggsave(paste0("ten_game_report/viz/trade_deadline_heatmap_defense_", Sys.Date(), ".png"), width = 21.333, height = 10.667)
 

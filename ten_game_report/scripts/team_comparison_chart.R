@@ -250,7 +250,7 @@ annotate_figure(
 
 ### save plot
 
-ggsave(paste0("Viz/team_comp_dash_", date, ".jpg"), width = 21.333, height = 10.667)
+ggsave(paste0("ten_game_report/viz/team_comp_dash_", date, ".jpg"), width = 21.333, height = 10.667)
 
 }
 

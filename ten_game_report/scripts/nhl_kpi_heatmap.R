@@ -65,4 +65,4 @@ ggplot(heatmap, aes(x = Team, y = Verbose, fill = Season_Value_Z_Score)) +
   theme(plot.caption = element_text(size = 18, face = "italic", hjust = 1, margin = margin(t = 15, b = 5), family = "Trebuchet MS"))
 
 
-ggsave("Viz/NHL_KPI_Heatmap_Totals.png", width = 21.333, height = 10.667)
+ggsave("ten_game_report/viz/NHL_KPI_Heatmap_Totals.png", width = 21.333, height = 10.667)

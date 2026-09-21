@@ -42,12 +42,14 @@ src <- src[-call_line]
 
 eval(parse(text = paste(src, collapse = "\n")), envir = environment())
 
-dir.create("Viz", showWarnings = FALSE)
-before <- list.files("Viz", full.names = TRUE)
+## the charts write to ten_game_report/viz relative to the repository root
+out_dir <- "ten_game_report/viz"
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+before <- list.files(out_dir, full.names = TRUE)
 
 do.call(fn_name, list())
 
-after <- setdiff(list.files("Viz", full.names = TRUE), before)
+after <- setdiff(list.files(out_dir, full.names = TRUE), before)
 stopifnot(length(after) == 1)
 invisible(file.rename(after, out_path))
 cat("wrote", out_path, "\n")
