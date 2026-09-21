@@ -15,26 +15,29 @@ measures <- list(
   "ST Results"   = c("Goals Scored Above Exp.", "Special Teams Index")
 )
 
-rows <- do.call(rbind, lapply(seq_along(measures), function(g) {
-  grp <- names(measures)[g]
-  do.call(rbind, lapply(seq_along(measures[[g]]), function(m) {
-    data.frame(
-      Team                  = "T.B",
-      Group                 = grp,
-      Verbose               = measures[[g]][m],
-      Group_Order           = g,
-      Measure_Order         = m,
-      Season_Value_Z_Score  = round(runif(1, -2, 2), 3),
-      PU10_Value_Z_Score    = round(runif(1, -2, 2), 3),
-      U10_Value_Z_Score     = round(runif(1, -2, 2), 3),
-      stringsAsFactors      = FALSE
-    )
+team_rows <- function(team) {
+  do.call(rbind, lapply(seq_along(measures), function(g) {
+    grp <- names(measures)[g]
+    do.call(rbind, lapply(seq_along(measures[[g]]), function(m) {
+      data.frame(
+        Team                  = team,
+        Group                 = grp,
+        Verbose               = measures[[g]][m],
+        Group_Order           = g,
+        Measure_Order         = m,
+        Season_Value_Z_Score  = round(runif(1, -2, 2), 3),
+        PU10_Value_Z_Score    = round(runif(1, -2, 2), 3),
+        U10_Value_Z_Score     = round(runif(1, -2, 2), 3),
+        stringsAsFactors      = FALSE
+      )
+    }))
   }))
-}))
+}
 
-## a second team - the comparison chart is hardcoded to T.B against ARI
-other <- rows; other$Team <- "ARI"
-rows <- rbind(rows, other)
+## two teams with independent values, so a chart comparing them is sensitive
+## to which team is which. T.B is generated first so its values are stable
+## regardless of what other teams are added.
+rows <- rbind(team_rows("T.B"), team_rows("ARI"))
 
 ## report_data[3] is what the chart reads
 report_data <- list(NULL, NULL, rows)

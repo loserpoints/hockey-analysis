@@ -67,6 +67,21 @@ requests 102 pages in a single run.
 one-off fetches — a single Wikipedia or Spotrac page — aren't throttled,
 because one request isn't a rate problem.
 
+## Tests
+
+`10 Game Report/test/` holds a synthetic fixture for the two dashboard charts.
+Both are pure functions of `report_data[3]` and eight columns, so they can be
+rendered without the original Natural Stat Trick scrape, which no longer
+exists.
+
+```
+Rscript "10 Game Report/test/fixture.R"
+Rscript "10 Game Report/test/render from fixture.R" "10 Game Report/Team Chart.R" out.jpg
+```
+
+Render before and after a change and compare checksums. This is how the
+panel extraction in both charts was verified as producing identical output.
+
 ## Running these
 
 ### Working directory

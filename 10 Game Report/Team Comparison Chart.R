@@ -1,6 +1,5 @@
 ### to do
 ## better title spacing on final dashboard
-## allow for selection of any two teams
 
 
 ######### generate team comparison chart with descriptive variabile names
@@ -12,6 +11,13 @@ require(ggthemes)
 require(scales)
 require(ggpubr)
 library(cowplot)
+
+
+###### select teams to compare
+
+select_team <- "T.B"
+
+compare_team <- "ARI"
 
 
 ###### generate team comparison chart using function defined below
@@ -29,9 +35,9 @@ comp_chart <- report_data [3] %>%
   
   data.frame(.) %>%
   
-  filter(Team == "T.B" | Team == "ARI") %>%
+  filter(Team == select_team | Team == compare_team) %>%
   
-  mutate(Team_Order = ifelse(Team == "T.B", 1, 2)) %>%
+  mutate(Team_Order = ifelse(Team == select_team, 1, 2)) %>%
   
   arrange(Team_Order, Group_Order, Measure_Order) %>%
   
@@ -220,19 +226,10 @@ comp_dash <-
 
 
 ### get title info
-comp_chart_teams <- comp_chart %>%
-  
-  select(Team) %>%
-  
-  distinct()
 
-team1 <- "T.B"
+team1 <- select_team
 
-team2 <- comp_chart_teams %>%
-  
-  filter(Team != "T.B")
-
-team2 <- team2[1, 1]
+team2 <- compare_team
 
 date <- Sys.Date()
 
