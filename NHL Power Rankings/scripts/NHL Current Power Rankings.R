@@ -11,7 +11,7 @@ library(extrafont)
 
 ###### set working directory
 
-setwd("C:/Users/Alan/Documents/R/Projects/Hockey/NHL Power Rankings")
+setwd("NHL Power Rankings")
 
 
 ###### run function to generate power rankings and associated plots

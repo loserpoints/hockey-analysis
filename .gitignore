@@ -14,3 +14,6 @@
 
 # Intermediate shot data, removed by the script after loading. See EH Shot Data/.
 shots_*.csv
+
+# local export from Hockey Reference/Standings.R
+lightning_bracket.csv

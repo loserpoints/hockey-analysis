@@ -19,7 +19,7 @@ shots_db <-
   dbConnect(
     MariaDB(),
     user = "root",
-    password = password,
+    password = Sys.getenv("HOCKEY_DB_PASSWORD"),
     dbname = "nhl_shots_eh",
     host = "localhost"
   )

@@ -17,6 +17,11 @@ site <-
 
 dflist <- lapply(site, function(i) {
   
+  ## rate limit - hockey reference publishes a limit of roughly 20 requests
+  ## per minute and blocks addresses that exceed it
+  
+  Sys.sleep(5)
+  
   page <- read_html(i)
   
   ps.table <- html_nodes(page, "table")
@@ -37,6 +42,11 @@ years <- seq(2008, 2020)
 site <- paste0("https://hockey-reference.com/leagues/NHL_", years, "_skaters.html")
 
 dflist <- lapply(site, function(i) {
+  
+  ## rate limit - hockey reference publishes a limit of roughly 20 requests
+  ## per minute and blocks addresses that exceed it
+  
+  Sys.sleep(5)
   
   page <- read_html(i)
   
