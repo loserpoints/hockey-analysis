@@ -10,6 +10,7 @@ library(tidyverse)
 library(ggthemes)
 library(scales)
 library(extrafont)
+library(reshape2)
 
 
 #load fonts for viz

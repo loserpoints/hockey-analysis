@@ -67,13 +67,61 @@ requests 102 pages in a single run.
 one-off fetches — a single Wikipedia or Spotrac page — aren't throttled,
 because one request isn't a rate problem.
 
+## Tests
+
+`10 Game Report/test/` holds a synthetic fixture for the two dashboard charts.
+Both are pure functions of `report_data[3]` and eight columns, so they can be
+rendered without the original Natural Stat Trick scrape, which no longer
+exists.
+
+```
+Rscript "10 Game Report/test/fixture.R"
+Rscript "10 Game Report/test/render from fixture.R" "10 Game Report/Team Chart.R" out.jpg
+```
+
+Render before and after a change and compare checksums. This is how the
+panel extraction in both charts was verified as producing identical output.
+
+`report data harness.R` does the same for `Data Wrangling.R`, stubbing the
+scrape so no request reaches Natural Stat Trick, and saving what
+`get_report_data()` returns for comparison with `identical()`.
+
+```
+Rscript "10 Game Report/test/report data harness.R" "10 Game Report/Data Wrangling.R" out.rds
+```
+
+Both harnesses shim two things that changed after this code was written:
+dplyr removed `funs()`, and `cbind()` on grouped tibbles now de-duplicates
+column names where it used to keep them. **These scripts do not run on a
+current tidyverse without those shims.** The shims exist so before and after
+can be compared under identical conditions, not as fixes.
+
 ## Running these
+
+### Packages
+
+```r
+install.packages(c("tidyverse", "extrafont", "ggthemes", "hrbrthemes", "rvest",
+                   "scales", "RMariaDB", "ggpubr", "ggrepel", "ggalt", "cowplot",
+                   "zoo", "reshape2", "mgcv", "ggforce", "fuzzyjoin",
+                   "BradleyTerry2", "googledrive", "googlesheets4"))
+```
+
+Written against the versions current in 2019–2020 and not updated since.
+Two things have changed underneath them: dplyr removed `funs()`, and
+`cbind()` on grouped tibbles now de-duplicates column names. **Several
+scripts will not run on a current tidyverse without adjustment.** That's
+recorded rather than fixed — the code is kept as it was written.
 
 ### Working directory
 
-Paths are relative to the repository root. Open `Hockey.Rproj` and run from
-there. Five scripts `setwd()` into their own project folder first; running one
-of those twice in a session will fail on the second `setwd()`.
+Most scripts read `data/` and write `viz/` relative to **their own project
+folder**, so set the working directory to that folder before running one.
+
+Five scripts instead call `setwd("Project Name")` at the top, which assumes
+the working directory is the repository root. These two conventions
+contradict each other — the repo has never settled on one. Running one of
+those five twice in a session will also fail on the second `setwd()`.
 
 ### Database
 

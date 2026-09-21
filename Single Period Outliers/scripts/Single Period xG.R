@@ -3,6 +3,7 @@
 library(tidyverse)
 library(extrafont)
 library(RMariaDB)
+library(hrbrthemes)
 
 ### load fonts for viz
 

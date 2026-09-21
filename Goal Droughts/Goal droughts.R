@@ -4,6 +4,8 @@ library(tidyverse)
 library(stringr)
 library(ggalt)
 library(extrafont)
+library(RMariaDB)
+library(ggthemes)
 
 ### load fonts for viz
 
@@ -133,7 +135,7 @@ ggplot(goal_droughts, aes(drought_degree)) +
         plot.title = element_text(size = 22, face = "bold", family = "Trebuchet MS", hjust = 0.5),
         plot.subtitle = element_text(size = 16, face = "italic", family = "Trebuchet MS", hjust = 0.5))
 
-ggsave("goal_drought_histogram.png", width = 21.333, height = 10.666)
+ggsave("viz/goal_drought_histogram.png", width = 21.333, height = 10.666)
 
 
 
@@ -191,7 +193,7 @@ ggplot(goal_droughts, aes(drought_degree)) +
         plot.title = element_text(size = 22, face = "bold", family = "Trebuchet MS", hjust = 0.5),
         plot.subtitle = element_text(size = 16, face = "italic", family = "Trebuchet MS", hjust = 0.5))
 
-ggsave("goal_drought_gourde.png", width = 21.333, height = 10.666)
+ggsave("viz/goal_drought_gourde.png", width = 21.333, height = 10.666)
 
 
 ### identify top 50 goal droughts in the data set
@@ -244,4 +246,4 @@ ggplot(top_50_droughts, aes(y = label)) +
         legend.text = element_text(size = 14, family = "Trebuchet MS"),
         legend.key.size = unit(1.25, "cm"))
 
-ggsave("top_goal_droughts.png", height = 21.333, width = 10.666)
+ggsave("viz/top_goal_droughts.png", height = 21.333, width = 10.666)

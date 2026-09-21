@@ -3,6 +3,7 @@
 library(tidyverse)
 library(ggthemes)
 library(extrafont)
+library(RMariaDB)
 
 
 ### load fonts for viz
@@ -110,7 +111,7 @@ ggplot(gsax_career_total, aes(pred_goal, total_gsax)) +
         legend.text = element_text(size = 14, family = "Trebuchet MS"),
         legend.position = "right")
 
-ggsave("career_gsax.png", width = 21.333, height = 10.666)
+ggsave("viz/career_gsax.png", width = 21.333, height = 10.666)
 
 
 ### plot individual goalie career gsax by shot danger by season
@@ -143,4 +144,4 @@ ggplot(gsax_career_by_season, aes(pred_goal, total_gsax)) +
         legend.text = element_text(size = 14, family = "Trebuchet MS"),
         legend.position = "right")
 
-ggsave("career_gsax_faceted.png", width = 21.333, height = 10.666)
+ggsave("viz/career_gsax_faceted.png", width = 21.333, height = 10.666)

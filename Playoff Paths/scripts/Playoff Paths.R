@@ -2,6 +2,7 @@ library(tidyverse)
 library(extrafont)
 library(fuzzyjoin)
 library(hrbrthemes)
+library(rvest)
 
 
 #### load fonts for viz
