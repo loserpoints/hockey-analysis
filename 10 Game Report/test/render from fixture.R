@@ -30,11 +30,14 @@ select_team  <- "T.B"
 verbose_team <- "Tampa Bay Lightning"
 
 src <- readLines(script_path, warn = FALSE)
-src <- src[!grepl("^\\s*library\\(", src)]
+src <- src[!grepl("^\\s*(library|require)\\(", src)]
 src <- src[!grepl("^\\s*loadfonts\\(", src)]
 
-call_line <- grep("^\\s*generate_team_dashboard\\(\\)\\s*$", src)
+## the chart scripts call their function above its definition, so the call is
+## dropped before evaluating and made explicitly afterwards
+call_line <- grep("^\\s*generate_\\w+\\(\\)\\s*$", src)
 stopifnot(length(call_line) == 1)
+fn_name <- sub("\\(\\)\\s*$", "", trimws(src[call_line]))
 src <- src[-call_line]
 
 eval(parse(text = paste(src, collapse = "\n")), envir = environment())
@@ -42,7 +45,7 @@ eval(parse(text = paste(src, collapse = "\n")), envir = environment())
 dir.create("Viz", showWarnings = FALSE)
 before <- list.files("Viz", full.names = TRUE)
 
-generate_team_dashboard()
+do.call(fn_name, list())
 
 after <- setdiff(list.files("Viz", full.names = TRUE), before)
 stopifnot(length(after) == 1)

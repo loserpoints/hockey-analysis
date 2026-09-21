@@ -32,8 +32,8 @@ rows <- do.call(rbind, lapply(seq_along(measures), function(g) {
   }))
 }))
 
-## a second team so the Team filter has something to exclude
-other <- rows; other$Team <- "BOS"
+## a second team - the comparison chart is hardcoded to T.B against ARI
+other <- rows; other$Team <- "ARI"
 rows <- rbind(rows, other)
 
 ## report_data[3] is what the chart reads
