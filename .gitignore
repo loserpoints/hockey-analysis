@@ -1,6 +1,13 @@
+# R session artifacts
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# Scratch work
 /Exploration
+
+# Source data — not committed. See README for where to obtain it.
+# Both cases are listed: scripts reference `data/` and `Data/` inconsistently.
+**/data
 **/Data
