@@ -9,11 +9,6 @@ library(ggalt)
 library(extrafont)
 
 
-###### set working directory
-
-setwd("nhl_power_rankings")
-
-
 
 ###### define function to generate power rankings and associated plots
 
@@ -172,7 +167,7 @@ ggplot(abilities, aes(y = team)) +
         legend.title = element_blank(),
         legend.text = element_text(size = 14, family = "Trebuchet MS"))
         
-ggsave("viz/nhl_power_rankings_current.png", height = 10.666, width = 21.333)
+ggsave("nhl_power_rankings/viz/nhl_power_rankings_current.png", height = 10.666, width = 21.333)
 
 return(abilities)
 
@@ -256,7 +251,7 @@ ggplot(gbg_diffs) +
         legend.position = "bottom",
         legend.spacing = unit(2, "cm"))
 
-ggsave("viz/nhl_game_result_distros.png", height = 10.666, width = 21.333)
+ggsave("nhl_power_rankings/viz/nhl_game_result_distros.png", height = 10.666, width = 21.333)
 
 
 ### reorder team factor by xG power ranking
@@ -315,7 +310,7 @@ ggplot(gbg_sked_strength) +
         legend.spacing = unit(2, "cm"))
 
 
-ggsave("viz/nhl_schedule_strength_distributions.png", height = 10.666, width = 21.333)
+ggsave("nhl_power_rankings/viz/nhl_schedule_strength_distributions.png", height = 10.666, width = 21.333)
 
 
 #### plot relationships between team quality and outcomes
@@ -344,7 +339,7 @@ ggplot(gbg, aes(ability_xG, xG_diff)) +
         strip.text = element_text(size = 16, color = "white", face = "bold", family = "Trebuchet MS"))
 
 
-ggsave("viz/nhl_xg_diff_opp_quality.png", height = 10.666, width = 21.333)
+ggsave("nhl_power_rankings/viz/nhl_xg_diff_opp_quality.png", height = 10.666, width = 21.333)
 
 
 }

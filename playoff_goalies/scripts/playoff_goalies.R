@@ -4,11 +4,11 @@ library(hrbrthemes)
 library(ggpubr)
 
 
-file_list <- list.files("data/")
+file_list <- list.files("playoff_goalies/data/")
 
 file_list_df <- lapply(file_list, function(i) {
   
-  read_csv(paste0("data/", i))
+  read_csv(paste0("playoff_goalies/data/", i))
   
 })
   
@@ -184,4 +184,4 @@ season_plot <-
 
 ggarrange(total_plot, season_plot, nrow = 2, heights = c(2, 4))
 
-ggsave(filename = "viz/playoff_outcomes.jpg", width = 10.666, height = 21.333)
+ggsave(filename = "playoff_goalies/viz/playoff_outcomes.jpg", width = 10.666, height = 21.333)

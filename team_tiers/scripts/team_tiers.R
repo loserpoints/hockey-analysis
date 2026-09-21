@@ -5,11 +5,6 @@ library(rvest)
 library(extrafont)
 library(hrbrthemes)
 
-
-###### set working directory
-
-setwd("team_tiers")
-
 ###### load fonts for viz
 
 loadfonts(device = "win")
@@ -19,10 +14,10 @@ import_plex_sans()
 
 ####### load local evolving hockey data
 
-skater_spar <- read_csv("data/skater_spar.csv")
-goalie_spar <- read_csv("data/goalie_spar.csv")
-team_spar <- read_csv("data/team_spar.csv")
-standings_eh <- read_csv("data/standings.csv")
+skater_spar <- read_csv("team_tiers/data/skater_spar.csv")
+goalie_spar <- read_csv("team_tiers/data/goalie_spar.csv")
+team_spar <- read_csv("team_tiers/data/team_spar.csv")
+standings_eh <- read_csv("team_tiers/data/standings.csv")
 
 
 ###### scrape team playoff outcomes from hockey reference
@@ -236,4 +231,4 @@ ggplot(standings_current, aes(Team, Points_Pace)) +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
-ggsave(filename = "viz/standings.png", width = 21.333, height = 10.666)
+ggsave(filename = "team_tiers/viz/standings.png", width = 21.333, height = 10.666)

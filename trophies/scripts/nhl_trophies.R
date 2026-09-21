@@ -13,7 +13,7 @@ import_plex_sans()
 
 ### read data from local
 
-skater_spar <- read_csv("data/skater_spar.csv") %>%
+skater_spar <- read_csv("trophies/data/skater_spar.csv") %>%
   
   select(-Team) %>%
   
@@ -22,34 +22,34 @@ skater_spar <- read_csv("data/skater_spar.csv") %>%
   summarize_all(sum)
 
 
-ev_rapm <- read_csv("data/ev_rapm.csv") %>%
+ev_rapm <- read_csv("trophies/data/ev_rapm.csv") %>%
   
   select(1:14, 18:23) %>% 
   
   mutate(Strength = "EV")
 
 
-pp_rapm <- read_csv("data/pp_rapm.csv") %>%
+pp_rapm <- read_csv("trophies/data/pp_rapm.csv") %>%
   
   mutate(Strength = "PP")
 
 
-sh_rapm <- read_csv("data/sh_rapm.csv") %>%
+sh_rapm <- read_csv("trophies/data/sh_rapm.csv") %>%
   
   mutate(Strength = "SH")
 
 
-calder_names <- read_csv("data/calder.csv") %>%
+calder_names <- read_csv("trophies/data/calder.csv") %>%
   
   select(Player = 1)
 
 
-ev_zones <- read_csv("data/ev_zones.csv") %>%
+ev_zones <- read_csv("trophies/data/ev_zones.csv") %>%
   
   mutate(Strength = "EV")
 
 
-sh_zones <- read_csv("data/sh_zones.csv") %>%
+sh_zones <- read_csv("trophies/data/sh_zones.csv") %>%
   
   mutate(Strength = "SH")
 
@@ -319,4 +319,4 @@ ggplot(trophies, aes(Player, Trophy_Metric, fill = Trophy)) +
         strip.background = element_rect(color = "gray36"),
         legend.position = "none")
 
-ggsave(filename = "viz/trophy_ballot_2020.jpg", width = 10.666, height = 21.333)
+ggsave(filename = "trophies/viz/trophy_ballot_2020.jpg", width = 10.666, height = 21.333)

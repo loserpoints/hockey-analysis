@@ -17,9 +17,9 @@ import_plex_sans()
 
 ### load local data
 
-skater_spar <- read_csv("data/skater_spar.csv")
+skater_spar <- read_csv("draft_spar/data/skater_spar.csv")
 
-skater_draft <- read_csv("data/skater_draft.csv") %>%
+skater_draft <- read_csv("draft_spar/data/skater_draft.csv") %>%
   
   select(EH_ID, draft_year = 'Draft Yr', draft_slot = 'Draft Ov') %>%
   
@@ -263,7 +263,7 @@ ggplot(draft_slot_spar, aes(x = draft_slot)) +
         legend.title = element_blank(),
         legend.text = element_text(size = 12))
 
-ggsave(filename = "viz/draft_slot_spar_curves.jpg", width = 21.333, height = 10.666)
+ggsave(filename = "draft_spar/viz/draft_slot_spar_curves.jpg", width = 21.333, height = 10.666)
 
 
 ### generate violin plot to show typical performance bt draft slot
@@ -300,4 +300,4 @@ ggplot(draft_slot_spar %>% filter(draft_slot < 31), aes(x = draft_slot, y = spar
         panel.grid.minor = element_line(colour = "grey90"),
         strip.text = element_text(hjust = 0.5, size = 14))
 
-ggsave(filename = "viz/draft_slot_spar.jpg", width = 21.333, height = 10.666)
+ggsave(filename = "draft_spar/viz/draft_slot_spar.jpg", width = 21.333, height = 10.666)

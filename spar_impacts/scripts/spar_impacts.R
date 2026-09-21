@@ -15,9 +15,9 @@ import_plex_sans()
 
 ### load war data csvs
 
-skater_war <- read_csv("data/skater_war.csv")
-goalie_war <- read_csv("data/goalie_war.csv")
-team_war <- read_csv("data/team_war.csv")
+skater_war <- read_csv("spar_impacts/data/skater_war.csv")
+goalie_war <- read_csv("spar_impacts/data/goalie_war.csv")
+team_war <- read_csv("spar_impacts/data/team_war.csv")
 
 
 ### scrape year by year standings data from espn
@@ -227,7 +227,7 @@ ggplot(spar_best_plot, aes(x = Player_Team_Season, xend = Player_Team_Season)) +
         legend.position = "bottom")
 
 
-ggsave(filename = "viz/spar_playoff_impact_best.jpg", height = 21.333, width = 10.666)
+ggsave(filename = "spar_impacts/viz/spar_playoff_impact_best.jpg", height = 21.333, width = 10.666)
 
 
 
@@ -284,7 +284,7 @@ ggplot(spar_worst_plot, aes(x = Player_Team_Season, xend = Player_Team_Season)) 
         legend.position = "bottom")
 
 
-ggsave(filename = "viz/spar_playoff_impact_worst.jpg", height = 21.333, width = 10.666)
+ggsave(filename = "spar_impacts/viz/spar_playoff_impact_worst.jpg", height = 21.333, width = 10.666)
 
 
 ### calculate replacement level team point totals for all team seasons
@@ -347,7 +347,7 @@ ggplot(team_season_spar, aes(x = Replacement_Level)) +
         axis.title.y = element_text(size = 18, hjust = 0.5))
 
 
-ggsave(filename = "viz/replacement_level_distro.png", height = 10.666, width = 21.333)
+ggsave(filename = "spar_impacts/viz/replacement_level_distro.png", height = 10.666, width = 21.333)
 
 
 ### calculate replacement level team point totals for all seasons
@@ -406,7 +406,7 @@ ggplot(season_spar, aes(Season, Replacement_Level)) +
         axis.title.x = element_text(size = 18, hjust = 0.5),
         axis.title.y = element_text(size = 18, hjust = 0.5))
 
-ggsave(filename = "viz/season_spar.jpg", width = 21.333, height = 10.666)
+ggsave(filename = "spar_impacts/viz/season_spar.jpg", width = 21.333, height = 10.666)
 
 
 ### calculate 16th place cut off by season, range, and average

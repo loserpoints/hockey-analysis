@@ -5,7 +5,7 @@ library(ggpubr)
 
 loadfonts(device = "win")
 
-teams <- read_csv("team_onice_5v5.csv") %>%
+teams <- read_csv("ten_game_report/in_game_charts/team_onice_5v5.csv") %>%
   
   mutate(color = ifelse(Team == "T.B", "dodgerblue3", "gray72"),
          label = ifelse(Team == "T.B", Team, ""),
@@ -125,4 +125,4 @@ annotate_figure(dash,
                 top = text_grob("Tampa Bay Lightning 5v5 Performance per 60 Minutes\n", family = "Trebuchet MS", size = 22, face = "bold"),
                 bottom = text_grob("All data via Evolving Hockey", family = "Trebuchet MS", size = 18, face = "italic", hjust = -2.25))
 
-ggsave("dashboard.png", width = 21.333, height = 10.666)
+ggsave("ten_game_report/in_game_charts/dashboard.png", width = 21.333, height = 10.666)

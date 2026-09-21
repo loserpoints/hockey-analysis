@@ -1,11 +1,6 @@
 library(tidyverse)
 library(RMariaDB)
 
-
-### set wd
-
-setwd("eh_shot_data")
-
 ### read current season data from local
 
 pbp_1920 <- read_csv("shots_1920.csv")

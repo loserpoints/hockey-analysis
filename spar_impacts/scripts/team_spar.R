@@ -73,4 +73,4 @@ ggplot(wings_spar, aes(x = SPAR)) +
         axis.title.y = element_text(size = 18, hjust = 0.5))
 
 
-ggsave(filename = "viz/wings_distro.jpg", height = 10.666, width = 21.333)
+ggsave(filename = "spar_impacts/viz/wings_distro.jpg", height = 10.666, width = 21.333)

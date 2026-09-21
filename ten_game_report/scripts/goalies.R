@@ -9,11 +9,6 @@ library(extrafont)
 library(RMariaDB)
 
 
-### set working directory
-
-setwd("ten_game_report")
-
-
 ### load fonts for viz
 
 loadfonts(device = "win")
@@ -364,7 +359,7 @@ annotate_figure(
 )
 
 
-ggsave("Viz/goalie_gbg.png", width = 21.333, height = 10.667)
+ggsave("ten_game_report/viz/goalie_gbg.png", width = 21.333, height = 10.667)
 
 runningdash <- ggarrange(running5v5.p, runningall.p, ncol = 2)
 
@@ -385,4 +380,4 @@ annotate_figure(
   )
 )
 
-ggsave("Viz/goalie_running.png", width = 21.333, height = 10.667)
+ggsave("ten_game_report/viz/goalie_running.png", width = 21.333, height = 10.667)

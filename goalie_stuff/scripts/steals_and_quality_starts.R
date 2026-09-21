@@ -223,7 +223,7 @@ ggplot(goalie_plot_current, aes(qual_start_share, steal_share, label = goalie)) 
         plot.subtitle = element_text(size = 16, face = "italic", family = "Trebuchet MS", hjust = 0.5),
         legend.title = element_text(size = 14, face = "bold", family = "Trebuchet MS"))
 
-ggsave("viz/goalie_plot.png", width = 21.333, height = 10.666)
+ggsave("goalie_stuff/viz/goalie_plot.png", width = 21.333, height = 10.666)
 
 
 
@@ -264,4 +264,4 @@ ggplot(goalie_plot_last_five, aes(qual_start_share, steal_share, label = goalie)
         plot.subtitle = element_text(size = 16, face = "italic", family = "Trebuchet MS", hjust = 0.5),
         legend.title = element_text(size = 14, face = "bold", family = "Trebuchet MS"))
 
-ggsave("viz/goalie_plot_last_five.png", width = 21.333, height = 10.666)
+ggsave("goalie_stuff/viz/goalie_plot_last_five.png", width = 21.333, height = 10.666)

@@ -14,12 +14,12 @@ import_plex_sans()
 
 ### read data from local and format
 
-final_ranks <- read_csv("data/2020 T25 Community Vote - Tabulation.csv") %>%
+final_ranks <- read_csv("ppp_t25u25/data/2020 T25 Community Vote - Tabulation.csv") %>%
   
   select(player = 1, final_rank = 30)
 
 
-votes <- read_csv("data/2020 T25 Community Vote - Raw Vote Data.csv") %>%
+votes <- read_csv("ppp_t25u25/data/2020 T25 Community Vote - Raw Vote Data.csv") %>%
   
   select(player = 1, 2:40) %>%
   
@@ -95,7 +95,7 @@ generate_viz <- lapply(players, function(x) {
       legend.position = "none"
     )
   
-  ggsave(filename = paste0("viz/", x, "_histo.jpg"), width = 21.333, height = 10.666)
+  ggsave(filename = paste0("ppp_t25u25/viz/", x, "_histo.jpg"), width = 21.333, height = 10.666)
   
 })
 
@@ -142,4 +142,4 @@ ggplot(facet_plot, aes(rank, count)) +
     legend.position = "none"
   )
 
-ggsave(filename = "viz/ranking_facets.jpg", width = 21.333, height = 10.666)
+ggsave(filename = "ppp_t25u25/viz/ranking_facets.jpg", width = 21.333, height = 10.666)

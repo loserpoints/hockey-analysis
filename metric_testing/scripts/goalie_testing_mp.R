@@ -14,7 +14,7 @@ loadfonts(device = "win")
 
 ### load moneypuck data from csv
 
-shots_mp_1 <- read_csv("data/shots_mp_1.csv") %>%
+shots_mp_1 <- read_csv("metric_testing/data/shots_mp_1.csv") %>%
   
   filter(shotOnEmptyNet == 0) %>%
   
@@ -24,7 +24,7 @@ shots_mp_1 <- read_csv("data/shots_mp_1.csv") %>%
   select(goalie = goalieNameForShot, team = goalie_team, season, goal, xGoal)
 
 
-shots_mp_2 <- read_csv("data/shots_mp_2.csv") %>%
+shots_mp_2 <- read_csv("metric_testing/data/shots_mp_2.csv") %>%
   
   filter(shotOnEmptyNet == 0) %>%
   
@@ -123,5 +123,5 @@ ggplot(goalie_seasons, aes(performance_1, performance_2)) +
         strip.text = element_text(hjust = 0.5, size = 18),
         strip.background = element_rect(color = "gray36"))
 
-ggsave(filename = "viz/goalie_repeatability_mp.png", width = 21.333, height = 10.666)
+ggsave(filename = "metric_testing/viz/goalie_repeatability_mp.png", width = 21.333, height = 10.666)
 

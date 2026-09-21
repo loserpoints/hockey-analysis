@@ -120,13 +120,10 @@ recorded rather than fixed — the code is kept as it was written.
 
 ### Working directory
 
-Most scripts read `data/` and write `viz/` relative to **their own project
-folder**, so set the working directory to that folder before running one.
-
-Five scripts instead call `setwd("project_name")` at the top, which assumes
-the working directory is the repository root. These two conventions
-contradict each other — the repo has never settled on one. Running one of
-those five twice in a session will also fail on the second `setwd()`.
+Open `Hockey.Rproj` and run from the repository root. Every path in every
+script is relative to that root — `team_tiers/data/skater_spar.csv`,
+`ten_game_report/viz/goalie_gbg.png` — so nothing needs the working
+directory changed and no script calls `setwd()`.
 
 ### Database
 

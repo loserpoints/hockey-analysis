@@ -14,12 +14,12 @@ loadfonts(device = "win")
 
 ### load data from local
 
-reader_votes <- read_csv("data/reader_votes.csv", skip = 1) %>%
+reader_votes <- read_csv("rc_t25u25_2020/data/reader_votes.csv", skip = 1) %>%
   
   select("user_id" = 1, 10:55)
 
 
-writer_votes <- read_csv("data/writer_votes.csv") %>%
+writer_votes <- read_csv("rc_t25u25_2020/data/writer_votes.csv") %>%
   
   select("player" = 1, 8:17)
 
@@ -207,6 +207,6 @@ generate_viz <- lapply(players, function(x) {
       legend.position = "none"
     )
   
-  ggsave(filename = paste0("viz/", x, ".jpg"), width = 21.333, height = 10.666)
+  ggsave(filename = paste0("rc_t25u25_2020/viz/", x, ".jpg"), width = 21.333, height = 10.666)
   
 })

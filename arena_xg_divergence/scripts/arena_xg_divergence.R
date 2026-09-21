@@ -173,4 +173,4 @@ ggplot(arena_xG_plot, aes(game_number, goal_divergence, color = team_season)) +
         strip.background = element_rect(color = "gray36"),
         legend.position = "none")
 
-ggsave(filename = "viz/arena_xG_divergence.png", width = 21.333, height = 10.66)
+ggsave(filename = "arena_xg_divergence/viz/arena_xG_divergence.png", width = 21.333, height = 10.66)
